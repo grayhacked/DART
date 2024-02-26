@@ -22,23 +22,19 @@ class EcranPrincipal extends StatefulWidget {
 class _EcranPrincipalState extends State<EcranPrincipal> {
   final List<String> moYo = [
     'Septembre',
-    'Statistique',
     'Algebre',
     'Messi',
     'Attie',
-    'Courtois',
-    'Python',
+    'Html',
     'Lub'
   ];
   final List<String> endis = [
-     "- Le neuvieme mois de l\'annee",
-    "- Une des matieres des mathematiques",
+     "- Le neuvieme mois de l'annee",
     "- Une des matieres des mathematiques",
     "- Le footballeur le plus celebre",
-    "- Directeur General de l\'ESIH",
-    "- Le gardien du football le plus celebre",
+    "- Directeur General de l'ESIH",
     "- Un langage de programmation facile",
-    "-  L\'enseignant de Flutter a ESIH",
+    "-Enseignant Flutter"
   ];
   late String moChwazi;
   late String endisLa;
@@ -104,22 +100,21 @@ class _EcranPrincipalState extends State<EcranPrincipal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  title: Text('Jwet Mo Kache'),
-  backgroundColor: Colors.blue,
-  centerTitle: true, // Mete tit la au center
-  actions: [
-    Center(
-      child: Padding(
-        padding: const EdgeInsets.only(right: 16.0),
-        child: Text(
-          'Chans: $chans',
-          style: TextStyle(fontSize: 16),
-        ),
+        title: Text('Jwet Mo Kache'),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        actions: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Text(
+                'Chans: $chans',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+        ],
       ),
-    ),
-  ],
-),
-
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -143,30 +138,14 @@ class _EcranPrincipalState extends State<EcranPrincipal> {
             Expanded(
               child: GridView.count(
                 crossAxisCount: 7,
-                childAspectRatio: 1.0,
                 children: List.generate(26, (index) {
-                  String let;
-                  if (index < 6) {
-                    let = 'QWERTY'[index];
-                  } else {
-                    int endeksAlfabe = index - 6;
-                    let =
-                        String.fromCharCode('a'.codeUnitAt(0) + endeksAlfabe);
-                    if (letDevine.contains(let) || moAfiche.contains(let)) {
-                      let = '';
-                    }
-                  }
+                  String letter = String.fromCharCode('a'.codeUnitAt(0) + index);
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: let.isNotEmpty
-                        ? ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(10.0),
-                            ),
-                            onPressed: () => devineLet(let),
-                            child: Text(let.toUpperCase()),
-                          )
-                        : Container(),
+                    child: ElevatedButton(
+                      onPressed: letDevine.contains(letter) ? null : () => devineLet(letter),
+                      child: Text(letter.toUpperCase()),
+                    ),
                   );
                 }),
               ),
